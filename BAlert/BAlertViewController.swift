@@ -25,7 +25,7 @@ class BAlertViewController: UIViewController {
         
     }
     @objc func hide() {
-        BAlert.sharedInstance.hide();
+        BAlert.sharedInstance.hideAllView();
     }
     
 
