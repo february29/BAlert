@@ -86,7 +86,7 @@ class BAlert {
     
     
     /// 全部隐藏
-    func hideAllView(finshedHandle:AnimationOverHandle? = nil) {
+    func hideAllView(finishedHandle:AnimationOverHandle? = nil) {
         
         for (_, view) in viewArrays.enumerated(){
             view.b_hideHandler?(view);
@@ -104,8 +104,8 @@ class BAlert {
             
             UIApplication.shared.delegate?.window??.makeKeyAndVisible();
             
-            if finshedHandle != nil{
-                finshedHandle!();
+            if finishedHandle != nil{
+                finishedHandle!();
             }
         }
     }
@@ -115,7 +115,7 @@ class BAlert {
     /// 隐藏特定view
     ///
     /// - Parameter view: view
-    func hide(view:UIView,finshedHandle:AnimationOverHandle? = nil){
+    func hide(view:UIView,finishedHandle:AnimationOverHandle? = nil){
         
         view.b_hideHandler?(view);
         
@@ -125,8 +125,8 @@ class BAlert {
         }) { (over) in
             view.removeFromSuperview();
             UIApplication.shared.delegate?.window??.makeKeyAndVisible();
-            if finshedHandle != nil{
-                finshedHandle!();
+            if finishedHandle != nil{
+                finishedHandle!();
             }
         }
         
