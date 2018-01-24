@@ -14,34 +14,7 @@ typealias BAlertHandler = (_ view:UIView)->Void;
 extension UIView{
     
     
-//    private struct AssociatedKeys {
-//        static var b_showHandler:BAlertHandler?
-//        static var b_hideHandler:BAlertHandler?
-//    }
-//
-//    var b_showHandler: BAlertHandler? {
-//        get {
-//            return objc_getAssociatedObject(self, &AssociatedKeys.b_showHandler) as? BAlertHandler
-//        }
-//        set {
-//            if let newValue = newValue {
-//                objc_setAssociatedObject(self, &AssociatedKeys.b_showHandler, newValue as BAlertHandler?, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//            }
-//        }
-//    }
-//
-//    var b_hideHandler: BAlertHandler? {
-//        get {
-//            return objc_getAssociatedObject(self, &AssociatedKeys.b_hideHandler) as? BAlertHandler
-//        }
-//        set {
-//            if let newValue = newValue {
-//                objc_setAssociatedObject(self, &AssociatedKeys.b_hideHandler, newValue as BAlertHandler?, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//            }
-//        }
-//    }
-//
-    
+
     struct BRuntimeKey {
         static let b_showHandler = UnsafeRawPointer.init(bitPattern: "b_showHandler".hashValue);
         static let b_hideHandler = UnsafeRawPointer.init(bitPattern: "b_hideHandler".hashValue);
@@ -70,8 +43,7 @@ extension UIView{
     
     
     
-//    var b_showHandler:BAlertHandler?
-//    var b_hideHandler:BAlertHandler?
+
     
     
     

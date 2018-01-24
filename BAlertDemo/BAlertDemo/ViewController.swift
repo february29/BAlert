@@ -27,12 +27,12 @@ class ViewController: UIViewController {
 //        BAlert.instance.show(view: view);
         BAlert.sharedInstance.show(view: view, showHandler: { (view) in
             view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
-            UIView.animate(withDuration: BAlert.sharedInstance.b_AnimationTime, animations: {
+            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 1);
             })
         }) { (view) in
             view.transform = CGAffineTransform(scaleX: 1, y: 1);
-            UIView.animate(withDuration: BAlert.sharedInstance.b_AnimationTime, animations: {
+            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
             })
         }
@@ -43,12 +43,12 @@ class ViewController: UIViewController {
         
         BAlert.sharedInstance.show(view: view2, showHandler: { (view) in
             view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
-            UIView.animate(withDuration: BAlert.sharedInstance.b_AnimationTime, animations: {
+            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 1);
             })
         }) { (view) in
             view.transform = CGAffineTransform(scaleX: 1, y: 1);
-            UIView.animate(withDuration: BAlert.sharedInstance.b_AnimationTime, animations: {
+            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
             })
         }
