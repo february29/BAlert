@@ -26,6 +26,11 @@ class BAlertConfig {
     
     
     
+    init() {
+        b_AnimationTime = 0.25;
+        b_backGroundColor =   UIColor.init(white: 0, alpha: 0.3);
+        b_shouldTapOutHidde = true;
+    }
     
    
     

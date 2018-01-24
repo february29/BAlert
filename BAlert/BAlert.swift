@@ -29,14 +29,7 @@ class BAlert {
     
    
     lazy var defaultConfig:BAlertConfig = {
-        
-        var config = BAlertConfig();
-        config = BAlertConfig();
-        config.b_AnimationTime = 0.25;
-        config.b_backGroundColor =   UIColor.init(white: 0, alpha: 0.3);
-        config.b_shouldTapOutHidde = true;
-        
-        return config;
+        return BAlertConfig();
         
     }();
     
@@ -126,9 +119,7 @@ class BAlert {
             }
             self.viewArrays.removeAll();
             self.nowConfig = self.defaultConfig;
-            
             UIApplication.shared.delegate?.window??.makeKeyAndVisible();
-            
             if finishedHandle != nil{
                 finishedHandle!();
             }
@@ -140,21 +131,37 @@ class BAlert {
     /// 隐藏特定view
     ///
     /// - Parameter view: view
-    func hide(view:UIView,finishedHandle:AnimationOverHandle? = nil){
+    func hide(view:UIView,hideWindow:Bool = true,finishedHandle:AnimationOverHandle? = nil){
         
         view.b_hideHandler?(view);
         
-        alertVC.backBtn.alpha = 1;
-        UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!, animations: {
-            self.alertVC.backBtn.alpha = 0;
-        }) { (over) in
-            view.removeFromSuperview();
-            self.nowConfig = self.defaultConfig;
-            UIApplication.shared.delegate?.window??.makeKeyAndVisible();
-            if finishedHandle != nil{
-                finishedHandle!();
+        if hideWindow {
+            // 如果需要隐藏window
+            self.alertVC.backBtn.alpha = 1;
+            UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!, animations: {
+                self.alertVC.backBtn.alpha = 0;
+            }) { (over) in
+                view.removeFromSuperview();
+                UIApplication.shared.delegate?.window??.makeKeyAndVisible();
+                if finishedHandle != nil{
+                    finishedHandle!();
+                }
+                
             }
+        }else{
+            //不隐藏window 延迟预定时间后将view移除
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (nowConfig?.b_AnimationTime)!, execute: {
+                view.removeFromSuperview();
+                if finishedHandle != nil{
+                    finishedHandle!();
+                }
+            });
+            
+           
+           
         }
+        
+       
         
         if let index = viewArrays.index(of: view) {
              viewArrays.remove(at: index);
