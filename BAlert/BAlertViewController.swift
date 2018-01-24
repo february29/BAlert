@@ -19,7 +19,6 @@ class BAlertViewController: UIViewController {
         super.viewDidLoad()
 
         backBtn.frame = self.view.bounds;
-    
         backBtn.addTarget(self, action: #selector(BAlertViewController.hide) , for: .touchUpInside);
         self.view .addSubview(backBtn);
         

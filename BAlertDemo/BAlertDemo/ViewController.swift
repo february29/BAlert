@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    let dataArray = ["自定义动画显示多个","自定义动画显示外部不可点击","大"]
+    let dataArray = ["自定义动画显示多个","自定义动画显示外部不可点击","二次弹窗"]
     
     
     lazy var tableView:UITableView = {
@@ -28,6 +28,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return table;
     }();
     
+    
+    
+    lazy var whriteView:UIView = {
+        let view = UIView();
+        view.frame = CGRect(x: 100, y: 150, width: 100, height: 100);
+        view.backgroundColor = UIColor.white;
+        return view;
+    }();
     
     lazy var blueView:UIView = {
         let view = UIView();
@@ -52,8 +60,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return view2;
     }();
     
+    
+    
     @objc func hideYellowViewOnly() {
         BAlert.sharedInstance.hide(view: yellowView, hideWindow: false);
+    }
+    
+    lazy var perpleView:UIView = {
+        let view = UIView();
+        view.frame = CGRect(x: 50, y: 150, width: 100, height: 100);
+        view.backgroundColor = UIColor.purple;
+        let tabges = UITapGestureRecognizer(target: self, action: #selector(perpleViewTap));
+        view .addGestureRecognizer(tabges);
+        return view;
+    }();
+    
+    
+    
+    @objc func perpleViewTap() {
+        BAlert.sharedInstance.show(view: whriteView);
     }
     
 
@@ -89,8 +114,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             self.show1();
         }else if indexPath.row == 1{
             self.show2();
-        }else{
-           
+        }else if indexPath.row == 2{
+            self.show3();
         }
         
     }
@@ -110,57 +135,74 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //    MARK: 各种显示设置
     
     
+    
+    /// 多个view
     func show1(){
        
-        BAlert.sharedInstance.show(view: blueView, showHandler: { (view) in
+        BAlert.sharedInstance.show(view: blueView, showHandler: { (view,config) in
             view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
-            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 1);
             })
-        }) { (view) in
+        }) { (view,config) in
             view.transform = CGAffineTransform(scaleX: 1, y: 1);
-            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
             })
         }
         
        
         
-        BAlert.sharedInstance.show(view: yellowView, showHandler: { (view) in
+        BAlert.sharedInstance.show(view: yellowView, showHandler: { (view,config) in
             
             view.transform = CGAffineTransform(rotationAngle: 0);
-            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                 view.transform = CGAffineTransform(rotationAngle: 1);
             })
-        }) { (view) in
+        }) { (view,config) in
             view.transform = CGAffineTransform(rotationAngle: 1);
-            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                 view.transform = CGAffineTransform(rotationAngle: 0);
             })
         }
         
     }
     
-    
+    //外部不可点击
     func show2(){
-        let view = UIView();
-        view.frame = CGRect(x: 100, y: 100, width: 100, height: 100);
-        view.backgroundColor = UIColor.blue;
+        
         let config =  BAlertConfig();
         config.b_shouldTapOutHidde = false;
-        BAlert.sharedInstance.show(view: blueView,config: config, showHandler: { (view) in
+        BAlert.sharedInstance.show(view: blueView,config: config, showHandler: { (view,config) in
             view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
-            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 1);
             })
-        }) { (view) in
+        }) { (view,config) in
             view.transform = CGAffineTransform(scaleX: 1, y: 1);
-            UIView.animate(withDuration: (BAlert.sharedInstance.nowConfig?.b_AnimationTime)!, animations: {
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
             })
         }
         
        
+        
+    }
+    
+    func show3(){
+        BAlert.sharedInstance.show(view: perpleView,config: nil, showHandler: { (view,config) in
+            view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
+                view.transform = CGAffineTransform(scaleX: 1, y: 1);
+            })
+        }) { (view,config) in
+            view.transform = CGAffineTransform(scaleX: 1, y: 1);
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
+                view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
+            })
+        }
+        
+        
         
     }
     

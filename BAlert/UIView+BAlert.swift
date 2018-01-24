@@ -9,7 +9,7 @@
 import UIKit
 
 
-typealias BAlertHandler = (_ view:UIView)->Void;
+typealias BAlertHandler = (_ view:UIView,_ config:BAlertConfig)->Void;
 
 extension UIView{
     

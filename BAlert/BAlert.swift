@@ -65,18 +65,22 @@ class BAlert {
  
     func show(view:UIView! ,config:BAlertConfig? = nil,showHandler:BAlertHandler? = nil,hideHandler:BAlertHandler? = nil) {
 
-
-       
+        
+        //防止多次添加同一个view
+        if viewArrays.contains(view) {
+            return;
+        }
+    
+        //window可见
         alertWindow.makeKeyAndVisible();
         alertVC.view.addSubview(view);
         viewArrays.append(view);
     
-
         view.b_showHandler = showHandler;
         view.b_hideHandler = hideHandler;
         
         
-        
+        //设置显示配置信息
         if let parConfig = config {
             nowConfig = parConfig;
         }else{
@@ -84,7 +88,7 @@ class BAlert {
         }
         alertVC.backBtn.backgroundColor = nowConfig?.b_backGroundColor;
         alertVC.backBtn.isUserInteractionEnabled = (nowConfig?.b_shouldTapOutHidde)!;
-
+        
         //背景显示按钮动画
         alertVC.backBtn.alpha = 0;
         UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!, animations: {
@@ -93,9 +97,9 @@ class BAlert {
             
         }
        
-        
+        //执行动画
         if let show = view.b_showHandler {
-            show(view);
+            show(view,nowConfig!);
         }
         
 
@@ -106,7 +110,7 @@ class BAlert {
     func hideAllView(finishedHandle:AnimationOverHandle? = nil) {
         
         for (_, view) in viewArrays.enumerated(){
-            view.b_hideHandler?(view);
+            view.b_hideHandler?(view,nowConfig!);
         }
        
         
@@ -133,7 +137,7 @@ class BAlert {
     /// - Parameter view: view
     func hide(view:UIView,hideWindow:Bool = true,finishedHandle:AnimationOverHandle? = nil){
         
-        view.b_hideHandler?(view);
+        view.b_hideHandler?(view,nowConfig!);
         
         if hideWindow {
             // 如果需要隐藏window
