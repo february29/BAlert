@@ -8,23 +8,10 @@
 
 import UIKit
 
-//let b_alertBackGroundColor = UIColor.init(white: 0, alpha: 0.3);
-
-
-
-
-
-
 typealias AnimationOverHandle = ()->Void;
 
 class BAlert {
-//    UIWindow *window;
-//    BAlerterViewController *viewController;
-//    UIView *contentView;
-    
-    //动画时间
-//    var b_AnimationTime = 0.25;
-    
+
    
     
    
@@ -37,8 +24,8 @@ class BAlert {
     
     
     
-    let alertWindow = UIWindow(frame:UIScreen.main.bounds);
-    let alertVC = BAlertViewController();
+    let alertWindow = BAlertWindow(frame:UIScreen.main.bounds);
+//    let alertVC = BAlertViewController();
     
     
     
@@ -52,17 +39,22 @@ class BAlert {
         self.config();
     }
     
-    func config()  {
-        
-       
-        alertWindow.rootViewController = alertVC;
-        
+    func config() {
+//        alertWindow.rootViewController = alertVC;
     }
     
     
     
     
  
+    
+    /// 模态显示view
+    ///
+    /// - Parameters:
+    ///   - view: view
+    ///   - config: 用于配置显示背景 动画时间 是否点击外部隐藏等
+    ///   - showHandler: 显示动画
+    ///   - hideHandler: 隐藏动画
     func show(view:UIView! ,config:BAlertConfig? = nil,showHandler:BAlertHandler? = nil,hideHandler:BAlertHandler? = nil) {
 
         
@@ -73,11 +65,9 @@ class BAlert {
     
         //window可见
         alertWindow.makeKeyAndVisible();
-        alertVC.view.addSubview(view);
+        alertWindow.addSubview(view);
+//        alertVC.view.addSubview(view);
         viewArrays.append(view);
-    
-        view.b_showHandler = showHandler;
-        view.b_hideHandler = hideHandler;
         
         
         //设置显示配置信息
@@ -86,15 +76,23 @@ class BAlert {
         }else{
             nowConfig = defaultConfig;
         }
-        alertVC.backBtn.backgroundColor = nowConfig?.b_backGroundColor;
-        alertVC.backBtn.isUserInteractionEnabled = (nowConfig?.b_shouldTapOutHidde)!;
+        
+        
+        alertWindow.backBtn.backgroundColor = nowConfig?.b_backGroundColor;
+        alertWindow.backBtn.isUserInteractionEnabled = (nowConfig?.b_shouldTapOutHidde)!;
+        
+      
+        
+        //设置动画属性
+        view.b_showHandler = showHandler;
+        view.b_hideHandler = hideHandler;
         
         //背景显示按钮动画
-        alertVC.backBtn.alpha = 0;
+        self.alertWindow.backBtn.alpha = 0;
         UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!, animations: {
-            self.alertVC.backBtn.alpha = 1;
+            self.alertWindow.backBtn.alpha = 1;
         }) { (over) in
-            
+
         }
        
         //执行动画
@@ -106,7 +104,10 @@ class BAlert {
     }
     
     
+    
     /// 全部隐藏
+    ///
+    /// - Parameter finishedHandle: 完成回掉
     func hideAllView(finishedHandle:AnimationOverHandle? = nil) {
         
         for (_, view) in viewArrays.enumerated(){
@@ -114,9 +115,9 @@ class BAlert {
         }
        
         
-        alertVC.backBtn.alpha = 1;
+        self.alertWindow.backBtn.alpha = 1;
         UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!, animations: {
-            self.alertVC.backBtn.alpha = 0;
+            self.alertWindow.backBtn.alpha = 0;
         }) { (over) in
             for (_, view) in self.viewArrays.enumerated(){
                 view .removeFromSuperview();
@@ -132,18 +133,22 @@ class BAlert {
     
     
     
+    
     /// 隐藏特定view
     ///
-    /// - Parameter view: view
+    /// - Parameters:
+    ///   - view: view
+    ///   - hideWindow: 隐藏是否还原window
+    ///   - finishedHandle: 完成回掉
     func hide(view:UIView,hideWindow:Bool = true,finishedHandle:AnimationOverHandle? = nil){
         
         view.b_hideHandler?(view,nowConfig!);
         
         if hideWindow {
             // 如果需要隐藏window
-            self.alertVC.backBtn.alpha = 1;
+            self.alertWindow.backBtn.alpha = 1;
             UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!, animations: {
-                self.alertVC.backBtn.alpha = 0;
+                self.alertWindow.backBtn.alpha = 0;
             }) { (over) in
                 view.removeFromSuperview();
                 UIApplication.shared.delegate?.window??.makeKeyAndVisible();
@@ -173,7 +178,6 @@ class BAlert {
        
        
     }
-    
     
     
 }

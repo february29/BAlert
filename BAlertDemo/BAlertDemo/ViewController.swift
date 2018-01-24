@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    let dataArray = ["自定义动画显示多个","自定义动画显示外部不可点击","二次弹窗"]
+    let dataArray = ["自定义动画显示多个","自定义动画显示外部不可点击","二次弹窗",""]
     
     
     lazy var tableView:UITableView = {
@@ -100,6 +100,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return 3;
     }
     
+
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell");
@@ -116,6 +119,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             self.show2();
         }else if indexPath.row == 2{
             self.show3();
+        }else if indexPath.row == 3{
+            self.show4();
         }
         
     }
@@ -191,6 +196,26 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func show3(){
         BAlert.sharedInstance.show(view: perpleView,config: nil, showHandler: { (view,config) in
+            view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
+                view.transform = CGAffineTransform(scaleX: 1, y: 1);
+            })
+        }) { (view,config) in
+            view.transform = CGAffineTransform(scaleX: 1, y: 1);
+            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
+                view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
+            })
+        }
+        
+        
+        
+    }
+    
+    
+    func show4(){
+        
+        let config =  BAlertConfig();
+        BAlert.sharedInstance.show(view: blueView,config: config, showHandler: { (view,config) in
             view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
             UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                 view.transform = CGAffineTransform(scaleX: 1, y: 1);

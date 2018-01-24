@@ -13,9 +13,9 @@
 		212CE1A61FE3BA8500E786E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 212CE1A51FE3BA8500E786E8 /* Assets.xcassets */; };
 		212CE1A91FE3BA8500E786E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 212CE1A71FE3BA8500E786E8 /* LaunchScreen.storyboard */; };
 		212CE1B51FE3BE7400E786E8 /* BAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE1B41FE3BE7400E786E8 /* BAlert.swift */; };
-		212CE1B71FE3BF7C00E786E8 /* BAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE1B61FE3BF7C00E786E8 /* BAlertViewController.swift */; };
 		212CE1B91FE3EEE600E786E8 /* UIView+BAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE1B81FE3EEE600E786E8 /* UIView+BAlert.swift */; };
 		213FF368201831E0002B1D2D /* BAlertConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213FF367201831E0002B1D2D /* BAlertConfig.swift */; };
+		213FF36A20186EF7002B1D2D /* BAlertWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213FF36920186EF7002B1D2D /* BAlertWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +27,9 @@
 		212CE1A81FE3BA8500E786E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		212CE1AA1FE3BA8500E786E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		212CE1B41FE3BE7400E786E8 /* BAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BAlert.swift; sourceTree = "<group>"; };
-		212CE1B61FE3BF7C00E786E8 /* BAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAlertViewController.swift; sourceTree = "<group>"; };
 		212CE1B81FE3EEE600E786E8 /* UIView+BAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+BAlert.swift"; sourceTree = "<group>"; };
 		213FF367201831E0002B1D2D /* BAlertConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAlertConfig.swift; sourceTree = "<group>"; };
+		213FF36920186EF7002B1D2D /* BAlertWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAlertWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +77,9 @@
 			isa = PBXGroup;
 			children = (
 				212CE1B41FE3BE7400E786E8 /* BAlert.swift */,
-				212CE1B61FE3BF7C00E786E8 /* BAlertViewController.swift */,
-				212CE1B81FE3EEE600E786E8 /* UIView+BAlert.swift */,
 				213FF367201831E0002B1D2D /* BAlertConfig.swift */,
+				212CE1B81FE3EEE600E786E8 /* UIView+BAlert.swift */,
+				213FF36920186EF7002B1D2D /* BAlertWindow.swift */,
 			);
 			name = BAlert;
 			path = ../../BAlert;
@@ -160,9 +160,9 @@
 				212CE1A11FE3BA8500E786E8 /* ViewController.swift in Sources */,
 				213FF368201831E0002B1D2D /* BAlertConfig.swift in Sources */,
 				212CE19F1FE3BA8500E786E8 /* AppDelegate.swift in Sources */,
-				212CE1B71FE3BF7C00E786E8 /* BAlertViewController.swift in Sources */,
 				212CE1B51FE3BE7400E786E8 /* BAlert.swift in Sources */,
 				212CE1B91FE3EEE600E786E8 /* UIView+BAlert.swift in Sources */,
+				213FF36A20186EF7002B1D2D /* BAlertWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
