@@ -123,7 +123,6 @@ class BAlert {
                 view .removeFromSuperview();
             }
             self.viewArrays.removeAll();
-            self.nowConfig = self.defaultConfig;
             UIApplication.shared.delegate?.window??.makeKeyAndVisible();
             if finishedHandle != nil{
                 finishedHandle!();

@@ -16,6 +16,7 @@
 		212CE1B91FE3EEE600E786E8 /* UIView+BAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE1B81FE3EEE600E786E8 /* UIView+BAlert.swift */; };
 		213FF368201831E0002B1D2D /* BAlertConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213FF367201831E0002B1D2D /* BAlertConfig.swift */; };
 		213FF36A20186EF7002B1D2D /* BAlertWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213FF36920186EF7002B1D2D /* BAlertWindow.swift */; };
+		213FF36C201875A0002B1D2D /* BAlert+NormalShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213FF36B201875A0002B1D2D /* BAlert+NormalShow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		212CE1B81FE3EEE600E786E8 /* UIView+BAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+BAlert.swift"; sourceTree = "<group>"; };
 		213FF367201831E0002B1D2D /* BAlertConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAlertConfig.swift; sourceTree = "<group>"; };
 		213FF36920186EF7002B1D2D /* BAlertWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAlertWindow.swift; sourceTree = "<group>"; };
+		213FF36B201875A0002B1D2D /* BAlert+NormalShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BAlert+NormalShow.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				213FF367201831E0002B1D2D /* BAlertConfig.swift */,
 				212CE1B81FE3EEE600E786E8 /* UIView+BAlert.swift */,
 				213FF36920186EF7002B1D2D /* BAlertWindow.swift */,
+				213FF36B201875A0002B1D2D /* BAlert+NormalShow.swift */,
 			);
 			name = BAlert;
 			path = ../../BAlert;
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				212CE1A11FE3BA8500E786E8 /* ViewController.swift in Sources */,
+				213FF36C201875A0002B1D2D /* BAlert+NormalShow.swift in Sources */,
 				213FF368201831E0002B1D2D /* BAlertConfig.swift in Sources */,
 				212CE19F1FE3BA8500E786E8 /* AppDelegate.swift in Sources */,
 				212CE1B51FE3BE7400E786E8 /* BAlert.swift in Sources */,

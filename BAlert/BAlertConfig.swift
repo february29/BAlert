@@ -10,15 +10,11 @@ import UIKit
 
 class BAlertConfig {
     
-    
-    
     /// 背景颜色
     var b_backGroundColor:UIColor?
-    
-    
+   
     /// 动画时间 此动画时间代表 背景显示和隐藏的时间
     var b_AnimationTime:TimeInterval?
-    
     
     /// 点击背景是否隐藏
     var b_shouldTapOutHidde:Bool?

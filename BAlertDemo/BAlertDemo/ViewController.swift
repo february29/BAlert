@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    let dataArray = ["自定义动画显示多个","自定义动画显示外部不可点击","二次弹窗",""]
+    let dataArray = ["自定义动画显示多个","自定义动画显示config设置","二次弹窗","中间缩放显示","中间左侧移入","测试"]
     
     
     lazy var tableView:UITableView = {
@@ -32,7 +32,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     lazy var whriteView:UIView = {
         let view = UIView();
-        view.frame = CGRect(x: 100, y: 150, width: 100, height: 100);
+        view.frame = CGRect(x: 150, y: 200, width: 100, height: 100);
         view.backgroundColor = UIColor.white;
         return view;
     }();
@@ -90,6 +90,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.view.addSubview(self.tableView);
         
         
+         self.view.addSubview(yellowView);
+        
+        
+        
     }
     
     
@@ -97,7 +101,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     //    MARK: table代理
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3;
+        return dataArray.count;
     }
     
 
@@ -121,6 +125,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             self.show3();
         }else if indexPath.row == 3{
             self.show4();
+        }else if indexPath.row == 4{
+            self.show5();
+        }else if indexPath.row == 5{
+            self.test();
         }
         
     }
@@ -159,7 +167,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
        
         
         BAlert.sharedInstance.show(view: yellowView, showHandler: { (view,config) in
-            
             view.transform = CGAffineTransform(rotationAngle: 0);
             UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                 view.transform = CGAffineTransform(rotationAngle: 1);
@@ -173,11 +180,19 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
     }
     
-    //外部不可点击
+    //利用config配置显示样式
     func show2(){
         
         let config =  BAlertConfig();
+        //是否点击外部隐藏
         config.b_shouldTapOutHidde = false;
+        //外部颜色
+        config.b_backGroundColor = UIColor.lightGray;
+        //动画时间
+        config.b_AnimationTime = 1;
+        
+        
+        
         BAlert.sharedInstance.show(view: blueView,config: config, showHandler: { (view,config) in
             view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
             UIView.animate(withDuration: config.b_AnimationTime!, animations: {
@@ -213,30 +228,123 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     
     func show4(){
-        
-        let config =  BAlertConfig();
-        BAlert.sharedInstance.show(view: blueView,config: config, showHandler: { (view,config) in
-            view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
-            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
-                view.transform = CGAffineTransform(scaleX: 1, y: 1);
-            })
-        }) { (view,config) in
-            view.transform = CGAffineTransform(scaleX: 1, y: 1);
-            UIView.animate(withDuration: config.b_AnimationTime!, animations: {
-                view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
-            })
-        }
-        
+       
+        BAlert.sharedInstance.normalShow(view: whriteView);
         
         
     }
     
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func show5(){
+        
+        BAlert.sharedInstance.normalShow(view: whriteView, location: .BCenterLocation, showAnimation: .BLeftMoveAnimation, hideAnimation: .BLeftMoveAnimation);
+        
+        
     }
+    
+    func test() {
+        
+//        let origin = view.bAlert_x;
+//
+//        let animation = CABasicAnimation();
+//        animation.keyPath = "position.y";
+//        animation.fromValue = -view.bAlert_width;
+//        animation.toValue = 0;
+//        animation.duration = 0.25;
+//        //                animation.fu
+//
+//
+//
+//
+//        //
+//        UIView.beginAnimations("FrameAni", context: nil);//开始动画
+//        UIView.setAnimationDelay(0);//动画延迟多少执行
+//        UIView.setAnimationDuration(0.25);//动画持续时间
+//        UIView.setAnimationDelegate(self);//动画代理
+//        UIView.setAnimationWillStart(#selector(self.startHandler));
+//        UIView.setAnimationDidStop(#selector(self.stopHandler));
+//        //动画曲线类型 （氛围 慢进慢出 ，慢进，慢出，线性）
+//        UIView.setAnimationCurve(.easeOut);
+//        UIView.setAnimationRepeatCount(1);//重复次数
+//        //是否从当前状态开始执行 true当前状态 false上一个动画结束时的状态
+//        UIView.setAnimationBeginsFromCurrentState(true);
+//        UIView.setAnimationRepeatAutoreverses(false);//是否执行相反动画
+//        UIView.setAnimationsEnabled(false);//是否禁用动画，只改变属性没有动画效果
+//        //设置过度效果，
+//        //效果 不使用  翻页
+//        //需要过度效果的view
+//        //是否用试图缓存 true 开始结束渲染  false每一帧渲染
+//        UIView.setAnimationTransition(.flipFromLeft, for: view, cache: true);
+//
+//        //实际动画要改变的属性等 这里是改变view的x坐标位置
+//        view.bAlert_x = -view.bAlert_width;
+//
+//        UIView.commitAnimations();//结束动画
+        
+        
+        
+        //
+        //普通动画
+        
+       
+       
+        let origin = yellowView.bAlert_x;
+
+        yellowView.bAlert_x = -yellowView.bAlert_width;
+        UIView.animate(withDuration:0.25, animations: {
+            self.yellowView.bAlert_x = origin;
+        });
+        
+        
+//        //spring动画 iOS7 以后
+//        //  参数：时常，延迟，震动效果（范围0~1，数值越小震动效果越明显），弹簧动画速度（数值越大速度越慢），过度效果，执行动画回掉，完成回掉
+         yellowView.bAlert_x = -yellowView.bAlert_width;
+        UIView.animate(withDuration: 3, delay: 0.1, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+            self.yellowView.bAlert_x = origin;
+        }, completion: { (over) in
+
+        });
+
+        //关键帧动画 iOS7 以后
+        //参数：时常，延迟，过度效果，执行动画回掉，完成回掉
+        yellowView.bAlert_x = -yellowView.bAlert_width;
+        UIView.animateKeyframes(withDuration: 1, delay: 0.1, options: UIViewKeyframeAnimationOptions.layoutSubviews, animations: {
+            //添加关键帧
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.1) {
+                self.yellowView.bAlert_x = origin/2;
+            };
+            self.yellowView.bAlert_x = origin;
+        }, completion: { (over) in
+
+        });
+        
+
+        
+        //视图替换动画 fromView会从父视图中移除，并且toView添加到父视图中
+        //针对父识图做动画 子视图只是单纯的移除和添加
+        UIView.transition(from: yellowView, to: blueView, duration: 5, options: .transitionFlipFromLeft, completion: { (over) in
 
 
+        });
+        
+
+        //单个视图动画，
+        UIView.transition(with: yellowView, duration: 3, options: .transitionFlipFromLeft, animations: {
+            self.yellowView.transform = CGAffineTransform(scaleX: 2, y: 2);
+        }, completion: { (over) in
+
+        });
+    }
+    
+
+    
+    
+    @objc func startHandler() {
+        
+    }
+    
+    @objc func stopHandler() {
+        
+    }
+    
 }
 
