@@ -116,7 +116,8 @@ class BAlert {
        
         
         self.alertWindow.backBtn.alpha = 1;
-        UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!, animations: {
+        //隐藏window的动画要比配置的动画时间稍短防止动画抖动
+        UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!-0.1, animations: {
             self.alertWindow.backBtn.alpha = 0;
         }) { (over) in
             UIApplication.shared.delegate?.window??.makeKeyAndVisible();
@@ -146,7 +147,8 @@ class BAlert {
         if hideWindow {
             // 如果需要隐藏window
             self.alertWindow.backBtn.alpha = 1;
-            UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!, animations: {
+            //隐藏window的动画要比配置的动画时间稍短防止动画抖动
+            UIView.animate(withDuration: (nowConfig?.b_AnimationTime)!-0.1, animations: {
                 self.alertWindow.backBtn.alpha = 0;
             }) { (over) in
                 UIApplication.shared.delegate?.window??.makeKeyAndVisible();
