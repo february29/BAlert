@@ -29,6 +29,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }();
     
     
+    lazy var myLayer:CALayer = {
+        let layer = CALayer();
+        layer.frame = yellowView.bounds;
+        layer.backgroundColor = UIColor.brown.cgColor;
+        return layer;
+    }();
+    
     
     lazy var whriteView:UIView = {
         let view = UIView();
@@ -92,6 +99,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
          self.view.addSubview(yellowView);
         
+        self.view.addSubview(blueView);
         
         
     }
@@ -284,55 +292,96 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         //
         //普通动画
-        
-       
-       
+//
+//
+//
         let origin = yellowView.bAlert_x;
+//
+//        yellowView.bAlert_x = -yellowView.bAlert_width;
+//        UIView.animate(withDuration:0.25, animations: {
+//            self.yellowView.bAlert_x = origin;
+//        });
 
-        yellowView.bAlert_x = -yellowView.bAlert_width;
-        UIView.animate(withDuration:0.25, animations: {
-            self.yellowView.bAlert_x = origin;
-        });
+//
+        //spring动画 iOS7 以后
+        //  参数：时常，延迟，震动效果（范围0~1，数值越小震动效果越明显），弹簧动画速度（数值越大速度越慢），过度效果，执行动画回掉，完成回掉
+//         yellowView.bAlert_x = -yellowView.bAlert_width;
         
         
-//        //spring动画 iOS7 以后
-//        //  参数：时常，延迟，震动效果（范围0~1，数值越小震动效果越明显），弹簧动画速度（数值越大速度越慢），过度效果，执行动画回掉，完成回掉
-         yellowView.bAlert_x = -yellowView.bAlert_width;
+        
         UIView.animate(withDuration: 3, delay: 0.1, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
-            self.yellowView.bAlert_x = origin;
+            
+          
+            
+
+//            var frame =  self.yellowView.layer.frame;
+//            frame.size.height = 10;
+//            self.yellowView.layer.frame = frame;
+//            // 等同于上面的代码
+//            var frame =  self.yellowView.layer.frame;
+//            frame.size.height = 10;
+//            self.yellowView.layer.frame = frame;
+            
+        
+            //也会导致view 和layer 的frame的高度变化
+//            self.yellowView.transform = CGAffineTransform(scaleX: 1, y: 0.4);
         }, completion: { (over) in
+            
+            print("layer %d",self.yellowView.layer.frame.size.height);
+            print("view %d",self.yellowView.frame.size.height);
 
         });
 
         //关键帧动画 iOS7 以后
         //参数：时常，延迟，过度效果，执行动画回掉，完成回掉
-        yellowView.bAlert_x = -yellowView.bAlert_width;
-        UIView.animateKeyframes(withDuration: 1, delay: 0.1, options: UIViewKeyframeAnimationOptions.layoutSubviews, animations: {
-            //添加关键帧
-            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.1) {
-                self.yellowView.bAlert_x = origin/2;
-            };
-            self.yellowView.bAlert_x = origin;
-        }, completion: { (over) in
+//        yellowView.bAlert_x = -yellowView.bAlert_width;
+//        UIView.animateKeyframes(withDuration: 1, delay: 0.1, options: UIViewKeyframeAnimationOptions.layoutSubviews, animations: {
+//            //添加关键帧
+//            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.1) {
+//                self.yellowView.bAlert_x = origin/2;
+//            };
+//            self.yellowView.bAlert_x = origin;
+//        }, completion: { (over) in
+//
+//        });
 
-        });
+//
+//
+//        //视图替换动画 fromView会从父视图中移除，并且toView添加到父视图中
+//        //针对父识图做动画 子视图只是单纯的移除和添加
+//        UIView.transition(from: yellowView, to: blueView, duration: 5, options: .transitionFlipFromLeft, completion: { (over) in
+//
+//
+//        });
+//
+//
+//        //单个视图动画，
+//        UIView.transition(with: yellowView, duration: 3, options: .transitionFlipFromLeft, animations: {
+//            self.yellowView.transform = CGAffineTransform(scaleX: 2, y: 2);
+//        }, completion: { (over) in
+//
+//        });
+        
+        
+        
+        UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseOut, animations: {
+            self.yellowView.alpha = 0;
+            
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .overrideInheritedCurve , animations: {
+                UIView.setAnimationRepeatCount(2.5);
+                self.blueView.alpha = 0;
+            }, completion: { (over) in
+                
+            })
+            
+        }) { (over) in
+            
+        }
+    
+       
         
 
         
-        //视图替换动画 fromView会从父视图中移除，并且toView添加到父视图中
-        //针对父识图做动画 子视图只是单纯的移除和添加
-        UIView.transition(from: yellowView, to: blueView, duration: 5, options: .transitionFlipFromLeft, completion: { (over) in
-
-
-        });
-        
-
-        //单个视图动画，
-        UIView.transition(with: yellowView, duration: 3, options: .transitionFlipFromLeft, animations: {
-            self.yellowView.transform = CGAffineTransform(scaleX: 2, y: 2);
-        }, completion: { (over) in
-
-        });
     }
     
 

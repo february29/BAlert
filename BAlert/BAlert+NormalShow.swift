@@ -76,10 +76,14 @@ extension BAlert{
                 
                 
                 let origin = view.bAlert_x;
-                
+
                 view.bAlert_x = -view.bAlert_width;
+
+//                view.backgroundColor = UIColor.green;
                 UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                     view.bAlert_x = origin;
+//                    view.backgroundColor = UIColor.brown;
+                    
                 });
                 
                 
@@ -139,6 +143,7 @@ extension BAlert{
             hideHandler = { (view, config) in
                 let origin = view.bAlert_x;
                 view.bAlert_x = origin;
+                
                 UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                      view.bAlert_x = -view.bAlert_width;
                 }, completion: { (over) in
@@ -149,6 +154,7 @@ extension BAlert{
             hideHandler = { (view, config) in
                 let origin = view.bAlert_x;
                 view.bAlert_x = origin;
+                
                 UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                     view.bAlert_x = self.alertWindow.bAlert_width;
                 }, completion: { (over) in
@@ -164,7 +170,8 @@ extension BAlert{
                 UIView.animate(withDuration: config.b_AnimationTime!, animations: {
                     view.transform = CGAffineTransform(scaleX: 0.4, y: 0.4);
                 }, completion: { (over) in
-                    view.transform = CGAffineTransform(scaleX: 1, y: 1);
+                    
+                    view.transform = CGAffineTransform.identity;
                 });
             };
         }
