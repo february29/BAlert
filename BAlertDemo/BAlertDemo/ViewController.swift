@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    let dataArray = ["自定义动画显示多个","自定义动画显示config设置","二次弹窗","中间缩放显示","中间左侧移入","测试"]
+    let dataArray = ["自定义动画显示多个","自定义动画显示config设置","二次弹窗","中间缩放显示","中间左侧移入","吐司"]
     
     
     lazy var tableView:UITableView = {
@@ -75,7 +75,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     lazy var perpleView:UIView = {
         let view = UIView();
-        view.frame = CGRect(x: 50, y: 150, width: 100, height: 100);
+        view.frame = CGRect(x: 200, y: 200, width: 100, height: 100);
         view.backgroundColor = UIColor.purple;
         let tabges = UITapGestureRecognizer(target: self, action: #selector(perpleViewTap));
         view .addGestureRecognizer(tabges);
@@ -97,10 +97,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.view.addSubview(self.tableView);
         
         
-         self.view.addSubview(yellowView);
-        
-        self.view.addSubview(blueView);
-        
+//         self.view.addSubview(yellowView);
+//
+//        self.view.addSubview(blueView);
+//        self.view.addSubview(perpleView);
         
     }
     
@@ -136,7 +136,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }else if indexPath.row == 4{
             self.show5();
         }else if indexPath.row == 5{
-            self.test();
+            self.show6();
         }
         
     }
@@ -217,6 +217,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
     }
     
+    //二次弹窗
     func show3(){
         BAlert.sharedInstance.show(view: perpleView,config: nil, showHandler: { (view,config) in
             view.transform = CGAffineTransform(scaleX: 1, y: 0.1);
@@ -234,7 +235,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
     }
     
-    
+    //中间缩放显示
     func show4(){
        
         BAlert.sharedInstance.normalShow(view: whriteView);
@@ -242,9 +243,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
     }
     
+    //中间左侧移入
     func show5(){
         
         BAlert.sharedInstance.normalShow(view: whriteView, location: .BCenterLocation, showAnimation: .BLeftMoveAnimation, hideAnimation: .BLeftMoveAnimation);
+        
+        
+    }
+    //toast用法
+    func show6(){
+        
+//        BAlert.sharedInstance.makeToast(message: "ffadrrr--------------------------------------rrrrrrrv\nsf");
+        BAlert.sharedInstance.makeToast(message: "我是🍞")
         
         
     }
@@ -309,11 +319,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         
         
-        UIView.animate(withDuration: 3, delay: 0.1, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
-            
-          
-            
-
+//        UIView.animate(withDuration: 3, delay: 0.1, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+//
+//
+//
+//
 //            var frame =  self.yellowView.layer.frame;
 //            frame.size.height = 10;
 //            self.yellowView.layer.frame = frame;
@@ -325,12 +335,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
             //也会导致view 和layer 的frame的高度变化
 //            self.yellowView.transform = CGAffineTransform(scaleX: 1, y: 0.4);
-        }, completion: { (over) in
-            
-            print("layer %d",self.yellowView.layer.frame.size.height);
-            print("view %d",self.yellowView.frame.size.height);
-
-        });
+//        }, completion: { (over) in
+//
+//            print("layer %d",self.yellowView.layer.frame.size.height);
+//            print("view %d",self.yellowView.frame.size.height);
+//
+//        });
 
         //关键帧动画 iOS7 以后
         //参数：时常，延迟，过度效果，执行动画回掉，完成回掉
@@ -362,22 +372,93 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 //
 //        });
         
+        self.yellowView.alpha = 1;
+        self.blueView.alpha = 1;
+        self.perpleView.alpha = 1;
         
         
-        UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseOut, animations: {
-            self.yellowView.alpha = 0;
-            
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: .overrideInheritedCurve , animations: {
-                UIView.setAnimationRepeatCount(2.5);
-                self.blueView.alpha = 0;
-            }, completion: { (over) in
-                
-            })
-            
-        }) { (over) in
-            
-        }
-    
+        print("outblock\(String(describing: self.blueView.layer.delegate))")
+        
+        
+        UIView.animate(withDuration: 2, delay: 0.0, options: [.overrideInheritedCurve,.curveLinear,.overrideInheritedDuration,.repeat,.autoreverse] , animations: {
+             print("inblock\(String(describing: self.blueView.layer.delegate))")
+            UIView.setAnimationRepeatCount(2.5);
+            self.blueView.alpha = 0;
+        }, completion: { (over) in
+
+        })
+        
+//        let animation = CABasicAnimation(keyPath: "opacity");
+//        animation.duration = 2;
+//        animation.fromValue = 1;
+//        animation.toValue = 0;
+//        animation.beginTime = CACurrentMediaTime() + 0;
+//        animation.timingFunction = CAMediaTimingFunction(name: "linear");
+//        animation.autoreverses = true;
+//        animation.repeatCount = 2.5;
+//        animation.isRemovedOnCompletion = false;
+//        animation.fillMode = kCAFillModeForwards;
+//        self.perpleView.layer.add(animation, forKey: "animation");
+//
+        
+//        UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseOut, animations: {
+//            self.yellowView.alpha = 0;
+//            
+//            UIView.animate(withDuration: 2, delay: 0.0, options: [.overrideInheritedCurve,.curveLinear,.overrideInheritedDuration,.repeat,.autoreverse] , animations: {
+//                UIView.setAnimationRepeatCount(2.5);
+//                self.blueView.alpha = 0;
+//            }, completion: { (over) in
+//                
+//            })
+//            
+//            
+//            let animation = CABasicAnimation(keyPath: "opacity");
+//            animation.duration = 2;
+//            animation.fromValue = 1;
+//            animation.toValue = 0;
+//            animation.beginTime = CACurrentMediaTime() + 0;
+//            animation.timingFunction = CAMediaTimingFunction(name: "linear");
+//            animation.autoreverses = true;
+//            animation.repeatCount = 2.5;
+//            animation.isRemovedOnCompletion = false;
+//            animation.fillMode = kCAFillModeForwards;
+//            self.perpleView.layer.add(animation, forKey: "animation");
+//            
+//            
+//            
+//            
+//        }) { (over) in
+//            
+//            
+//        }
+//        
+       
+        
+        
+      
+//        UIView.animate(withDuration: 1.0, delay: 5.0, options: .curveEaseOut, animations: {
+//            self.yellowView.alpha = 0;
+//
+//            UIView.animate(withDuration: 3, delay: 0.0, options: [.overrideInheritedCurve,.curveEaseIn,.overrideInheritedDuration,.repeat,.autoreverse] , animations: {
+//                UIView.setAnimationRepeatCount(2.5);
+//                self.blueView.alpha = 0;
+//            }, completion: { (over) in
+//
+//            })
+//
+//
+//            UIView.animate(withDuration: 3, delay: 0.0, options: [.overrideInheritedCurve,.curveEaseIn,.overrideInheritedDuration,.repeat,.autoreverse] , animations: {
+//                UIView.setAnimationRepeatCount(2);
+//                self.perpleView.alpha = 0;
+//            }, completion: { (over) in
+//
+//            })
+//
+//
+//        }) { (over) in
+//
+//        }
+//
        
         
 

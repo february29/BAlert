@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+// MARK: 常用动画
 extension BAlert{
     
     enum BAlertLocatoin{
@@ -27,6 +27,13 @@ extension BAlert{
     }
     
     
+    /// 通用显示
+    ///
+    /// - Parameters:
+    ///   - view: view
+    ///   - location: 显示位置 默认中间
+    ///   - showAnimation: 显示动画 默认缩放
+    ///   - hideAnimation: 隐藏动画 默认缩放
     func normalShow(view:UIView,location:BAlertLocatoin = .BCenterLocation ,showAnimation:BAlertAnimation = .BScaleAnimaion,hideAnimation:BAlertAnimation = .BScaleAnimaion) {
         
         
@@ -187,4 +194,118 @@ extension BAlert{
     
   
     
+}
+
+// MARK: 控件下拉显示
+extension BAlert{
+    
+}
+// MARK: 吐司显示
+extension BAlert{
+    
+    enum BAlertToastLocatoin{
+        case BToastBottomLoaction;
+        case BToastCenterLocation;
+        case BToastTopLoaction;
+        case BToastNoneLoaction;
+       
+    }
+    
+    class TosatLable:UILabel  {
+        override func drawText(in rect: CGRect) {
+            let insets = UIEdgeInsetsMake(5, 5, 5, 5);
+            super.drawText(in: UIEdgeInsetsInsetRect(rect,insets))
+            
+        }
+    }
+    
+    
+    func makeToast(message:String,showTime:TimeInterval = 2,location:BAlertToastLocatoin = .BToastBottomLoaction) {
+        let lable = TosatLable();
+        lable.text = message;
+        lable.font = UIFont.systemFont(ofSize: 14);
+        lable.textAlignment = .center;
+        lable.textColor = UIColor.white;
+        lable.backgroundColor = UIColor.black;
+        lable.layer.cornerRadius = 3;
+        lable.layer.masksToBounds = true;
+        lable.lineBreakMode = .byWordWrapping;
+        lable.numberOfLines = 0;
+        lable.sizeToFit();
+       
+        lable.bAlert_size = self.sizeForString(text: message, font: lable.font);
+        lable.bAlert_centerX = self.alertWindow.center.x;
+        if location == .BToastCenterLocation{
+            lable.bAlert_centerY = self.alertWindow.center.y;
+        }else if location == .BToastTopLoaction{
+            //iphonex serious
+            if UIScreen.main.bounds.height >= 812{
+                lable.bAlert_y =  84 + 100;
+            }else{
+                lable.bAlert_y = 64 + 100;
+            }
+            
+            
+        }else if location == .BToastBottomLoaction{
+            //iphonex serious
+            if UIScreen.main.bounds.height >= 812{
+                lable.bAlert_y = UIScreen.main.bounds.height * 0.9 - 23 - lable.frame.size.height;
+            }else{
+                lable.bAlert_y =  UIScreen.main.bounds.height * 0.9 - lable.frame.size.height;
+            }
+        }
+        
+        
+    
+        
+        
+        let config = BAlertConfig();
+        config.b_backGroundColor = UIColor.clear;
+        config.b_shouldTapOutHidde = false;
+        config.b_AnimationTime = 1;
+        
+        
+    
+        
+        
+        self.show(view: lable, config: config, showHandler: { (view, config) in
+            view.alpha = 0;
+            UIView.animate(withDuration: 0.25, animations: {
+                view.alpha = 1;
+               
+            })
+        }) { (view, config) in
+            view.alpha = 1;
+            UIView.animate(withDuration: 1, animations: {
+                view.alpha = 0;
+            })
+        }
+        
+       
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + showTime - 1 , execute: {
+            self.hide(view: lable);
+        });
+        
+        
+        
+    }
+    
+    
+    func sizeForString(text:String,font:UIFont) -> CGSize {
+
+        let statusLabelText: NSString = text as NSString
+        
+        var size = CGSize(width: CGFloat(MAXFLOAT), height: 30)
+        var strSize = statusLabelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : font], context: nil).size
+
+        if strSize.width > UIScreen.main.bounds.width - 30 {
+             size = CGSize(width:UIScreen.main.bounds.width - 30, height: CGFloat(MAXFLOAT))
+             strSize = statusLabelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : font], context: nil).size
+        }
+
+        
+       
+       //str计算的是文本大小，lable的实际大小要加上内边距
+        return  CGSize(width: strSize.width+10, height: strSize.height+10);
+    }
 }
