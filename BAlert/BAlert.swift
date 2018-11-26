@@ -8,14 +8,16 @@
 
 import UIKit
 
-typealias AnimationOverHandle = ()->Void;
 
-class BAlert {
+public typealias AnimationOverHandle = ()->Void;
+
+public class BAlert {
 
    
     
+    
    
-    lazy var defaultConfig:BAlertConfig = {
+    lazy public var defaultConfig:BAlertConfig = {
         return BAlertConfig();
         
     }();
@@ -35,7 +37,7 @@ class BAlert {
     
     
     //单例
-    static let sharedInstance = BAlert();
+    static public let sharedInstance = BAlert();
     private init() {
         self.config();
     }
@@ -56,7 +58,7 @@ class BAlert {
     ///   - config: 用于配置显示背景 动画时间 是否点击外部隐藏等
     ///   - showHandler: 显示动画
     ///   - hideHandler: 隐藏动画
-    func show(view:UIView! ,config:BAlertConfig? = nil,showHandler:BAlertHandler? = nil,hideHandler:BAlertHandler? = nil) {
+    public func show(view:UIView! ,config:BAlertConfig? = nil,showHandler:BAlertHandler? = nil,hideHandler:BAlertHandler? = nil) {
 
         
         //防止多次添加同一个view
@@ -108,7 +110,7 @@ class BAlert {
     /// 全部隐藏
     ///
     /// - Parameter finishedHandle: 完成回掉
-    func hideAllView(finishedHandle:AnimationOverHandle? = nil) {
+    public func hideAllView(finishedHandle:AnimationOverHandle? = nil) {
         
         //隐藏view
         for (_, view) in viewArrays.enumerated(){
@@ -130,7 +132,7 @@ class BAlert {
     ///   - view: view
     ///   - hideWindow: 隐藏是否还原window
     ///   - finishedHandle: 完成回掉
-    func hide(view:UIView,hideWindow:Bool = true,finishedHandle:AnimationOverHandle? = nil){
+    public func hide(view:UIView,hideWindow:Bool = true,finishedHandle:AnimationOverHandle? = nil){
         
         //隐藏view
         view.b_hideHandler?(view,nowConfig!);
@@ -168,7 +170,7 @@ class BAlert {
        
     }
     
-    func hideWindow(animation:Bool,finishedHandle:AnimationOverHandle? = nil) {
+     func hideWindow(animation:Bool,finishedHandle:AnimationOverHandle? = nil) {
         if animation {
             self.alertWindow.backBtn.alpha = 1;
             //隐藏window的动画要比配置的动画时间稍短防止动画抖动

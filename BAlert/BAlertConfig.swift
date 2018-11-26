@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BAlertConfig {
+public class BAlertConfig {
     
     /// 背景颜色
     var b_backGroundColor:UIColor?

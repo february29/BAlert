@@ -11,13 +11,14 @@ import UIKit
 // MARK: 常用动画
 extension BAlert{
     
-    enum BAlertLocatoin{
+   
+    public enum BAlertLocatoin{
         case BNoneLoaction;
         case BCenterLocation;
         case BBottomLoaction;
     }
     
-    enum BAlertAnimation {
+    public enum BAlertAnimation {
         case BScaleAnimaion;
         case BTopMoveAnimation;
         case BBottomMoveAnimation;
@@ -34,7 +35,7 @@ extension BAlert{
     ///   - location: 显示位置 默认中间
     ///   - showAnimation: 显示动画 默认缩放
     ///   - hideAnimation: 隐藏动画 默认缩放
-    func normalShow(view:UIView,location:BAlertLocatoin = .BCenterLocation ,showAnimation:BAlertAnimation = .BScaleAnimaion,hideAnimation:BAlertAnimation = .BScaleAnimaion) {
+    public func normalShow(view:UIView,location:BAlertLocatoin = .BCenterLocation ,showAnimation:BAlertAnimation = .BScaleAnimaion,hideAnimation:BAlertAnimation = .BScaleAnimaion) {
         
         
         //位置设置
@@ -203,7 +204,7 @@ extension BAlert{
 // MARK: 吐司显示
 extension BAlert{
     
-    enum BAlertToastLocatoin{
+    public enum BAlertToastLocatoin{
         case BToastBottomLoaction;
         case BToastCenterLocation;
         case BToastTopLoaction;
@@ -220,7 +221,7 @@ extension BAlert{
     }
     
     
-    func makeToast(message:String,showTime:TimeInterval = 2,location:BAlertToastLocatoin = .BToastBottomLoaction) {
+    public func makeToast(message:String,showTime:TimeInterval = 2,location:BAlertToastLocatoin = .BToastBottomLoaction) {
         let lable = TosatLable();
         lable.text = message;
         lable.font = UIFont.systemFont(ofSize: 14);

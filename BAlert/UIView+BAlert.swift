@@ -9,11 +9,11 @@
 import UIKit
 
 
-typealias BAlertHandler = (_ view:UIView,_ config:BAlertConfig)->Void;
+public typealias BAlertHandler = (_ view:UIView,_ config:BAlertConfig)->Void;
 
 extension UIView{
     
-    
+   
 
     struct BRuntimeKey {
         static let b_showHandler = UnsafeRawPointer.init(bitPattern: "b_showHandler".hashValue);
