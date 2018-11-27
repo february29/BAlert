@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name         = 'BAlert'
-    spec.version      = '0.1.1'
+    spec.version      = '0.1.2'
     spec.summary      = '1.show a toast 2.modle show a customview'
     spec.homepage     = 'https://github.com/february29/BAlert'
     spec.license      = 'MIT'
